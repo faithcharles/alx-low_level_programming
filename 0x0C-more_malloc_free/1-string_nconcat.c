@@ -1,48 +1,47 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 /**
- *string_nconcat - concat 2 string
- *@s1: string 1
- *@s2: string 2
- *@n: integer value
- *Return: pointer points to a new allocated space else NULL
+ * string_nconcat - concatenates two strings
+ *
+ * @s1: first string
+ * @s2: second string
+ * @n: the number of bytes to include of @s2
+ *
+ * Return: newly allocated space in memory;
+ * NULL if the function fails
  */
-
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-char *str;
-unsigned int s1_len, s2_len, i;
+	char *ar;
+	unsigned int i = 0;
+	unsigned int j = 0;
+	unsigned int m;
+	unsigned int p;
+	unsigned int k = 0;
+	unsigned int len;
 
+	if (s1 == NULL)
+		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
+	while (s1[i])
+		i++;
+	while (s2[j])
+		j++;
+	if (j > n)
+		j = n;
 
-if (s1 == NULL)
-s1 = "";
-if (s2 == NULL)
-s2 = "";
+	len = i + j;
 
-for (s1_len = 0; s1[s1_len] != '\0'; s1_len++)
-;
+	ar = malloc(sizeof(char) * (len + 1));
+	if (ar == NULL)
+		return (NULL);
 
-for (s2_len = 0; s2[s2_len] != '\0'; s2_len++)
-;
+	for (p = 0; p < i; p++)
+		ar[k++] = s1[p];
+	for (m = 0; m < j; m++)
+		ar[k++] = s2[m];
 
-str = malloc(s1_len + s2_len + 1);
-
-
-if (n >= s2_len)
-n = s2_len;
-
-for (i = 0; s1[i] != '\0'; i++)
-str[i] = s1[i];
-
-for (i = 0; i < n; i++)
-str[s1_len + i] = s2[i];
-
-str[s1_len + n] = '\0';
-
-if (str == NULL)
-return (NULL);
-
-return (str);
+	ar[k] = '\0';
+	return (ar);
 }
